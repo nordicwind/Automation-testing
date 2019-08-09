@@ -103,8 +103,8 @@ class SignUpPage:
         checkbox_method = True
         test_name = "Registration with empty email."
         self.registration(name_method, email_method, password_method, checkbox_method)
-        return self.check_exists_by_xpath(test_name,
-                                          "//li[contains(text(),'Email can') and contains(text(),'t be blank')]")
+        return self.check_exists_by_xpath(
+            test_name, "//li[contains(text(),'Email can') and contains(text(),'t be blank')]")
 
     """Trying to sign up an account which already has been registred."""
     def already_registered_email_reg(self):
@@ -114,7 +114,8 @@ class SignUpPage:
         checkbox_method = True
         test_name = "Registration with already registered email."
         self.registration(name_method, email_method, password_method, checkbox_method)
-        return self.check_exists_by_xpath(test_name, "//li[@role='alert' and contains(text(),'Email has already been taken')]")
+        return self.check_exists_by_xpath(
+            test_name, "//li[@role='alert' and contains(text(),'Email has already been taken')]")
 
     """Trying to sign up with all valid data, but checkbox is not checked."""
     def no_checkbox_reg(self):
@@ -124,7 +125,8 @@ class SignUpPage:
         checkbox_method = False
         test_name = "Registration with valid values without checkbox."
         self.registration(name_method, email_method, password_method, checkbox_method)
-        return self.check_exists_by_xpath(test_name, "//li[@role='alert' and contains(text(), 'Terms')]")
+        return self.check_exists_by_xpath(
+            test_name, "//li[@role='alert' and contains(text(), 'Terms')]")
 
     """Trying to sign up with all valid data, but with empty 'password' field."""
     def empty_password_reg(self):
@@ -165,9 +167,12 @@ class SignUpPage:
                                             could be changed in the 'Random_generator', def too_long_name)."""
 
     def too_long_name_reg(self):
+        email_method = 'valid'
+        password_method = 'valid'
         name_method = 'too_long'
+        checkbox_method = True
         test_name = "Registration with too long name and last name (more than 255 symbols)."
-        self.check_name_method(name_method)
+        self.registration(name_method, email_method, password_method, checkbox_method)
         try:
             result1 = driver.find_element(By.XPATH, "//li[@role='alert' and contains(text(),'First name is too long')]")
             result2 = driver.find_element(By.XPATH, "//li[@role='alert' and contains(text(),'Last name is too long')]")
@@ -179,9 +184,12 @@ class SignUpPage:
     """Trying to sign up with empty 'name' and 'last name' fields"""
 
     def empty_name_reg(self):
+        email_method = 'valid'
+        password_method = 'valid'
         name_method = 'empty'
+        checkbox_method = True
         test_name = "Registration with empty name and last name."
-        self.check_name_method(name_method)
+        self.registration(name_method, email_method, password_method, checkbox_method)
         try:
             result1 = driver.find_element(
                 By.XPATH, "//li[contains(text(),'First name can') and contains(text(),'t be blank')]")
@@ -265,7 +273,7 @@ def auto():
     """)
 
 
-"""If started as main script - it will start all tests from the Sign_up_page class. After ending all tests
+"""If started as main script - it will start all tests from the SignUpPage class. After ending all tests
                                 it will show results of each test (passed or failed)."""
 if __name__ == "__main__":
     answer = ''
@@ -282,4 +290,5 @@ if __name__ == "__main__":
             break
         else:
             print('Invalid command...')
+
 driver.quit()
